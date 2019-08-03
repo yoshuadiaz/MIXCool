@@ -2,6 +2,8 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { createStore } from "redux"
 import { Provider } from "react-redux"
+import HakunaMatata from "./containers/HomeContainer"
+import YOLO from "./containers/YOLOContainer"
 
 const initialState = {
   counter: 0,
@@ -38,7 +40,8 @@ class Component extends React.Component {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Component />
+    <HakunaMatata />
+    <YOLO />
   </Provider>,
   document.getElementById("root")
 )
