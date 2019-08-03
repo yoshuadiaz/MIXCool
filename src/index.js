@@ -7,7 +7,8 @@ import YOLO from "./containers/YOLOContainer"
 
 const initialState = {
   counter: 0,
-  message: "Hello World"
+  message: "Hello World",
+  valueToOperate: 10
 }
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -15,6 +16,21 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, counter: state.counter + 1 }
     case "RESTAR UNO":
       return { ...state, counter: state.counter - 1 }
+    case "SUMAR LO QUE SEA":
+      return {
+        ...state,
+        counter: state.counter + parseInt(action.payload)
+      }
+    case "RESTAR LO QUE SEA":
+      return {
+        ...state,
+        counter: state.counter - parseInt(action.payload)
+      }
+    case "UPDATE valueToOperate":
+      return {
+        ...state,
+        valueToOperate: action.payload
+      }
     default:
       return state
   }
@@ -40,8 +56,8 @@ class Component extends React.Component {
 
 ReactDOM.render(
   <Provider store={store}>
-    <HakunaMatata />
     <YOLO />
+    <HakunaMatata />
   </Provider>,
   document.getElementById("root")
 )
