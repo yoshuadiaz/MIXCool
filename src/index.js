@@ -1,12 +1,44 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react"
+import ReactDOM from "react-dom"
+import { createStore } from "redux"
+import { Provider } from "react-redux"
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const initialState = {
+  counter: 0,
+  message: "Hello World"
+}
+const rootReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "SUMAR UNO":
+      return { ...state, counter: state.counter + 1 }
+    case "RESTAR UNO":
+      return { ...state, counter: state.counter - 1 }
+    default:
+      return state
+  }
+}
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
+
+class Component extends React.Component {
+  constructor() {
+    super()
+  }
+  render() {
+    return (
+      <div>
+        <h1>Hola manitos </h1>
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(
+  <Provider store={store}>
+    <Component />
+  </Provider>,
+  document.getElementById("root")
+)
